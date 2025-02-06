@@ -1,0 +1,170 @@
+---
+title: "D-Valor: comparação e aplicação para dados massivos"
+author: "Jeff Caponero"
+format: 
+  beamer:
+    highlight-style: atom-one
+    urlcolor: blue
+    linkcolor: white
+    theme: 'Madrid'
+    mathspec: true
+---
+
+## Discussão histórica sobre os problemas do p-valor
+
+-   1963: Primeiro capítulo de livro sobre o tema (Clark)
+-   1978: "radicalmente defeituoso a ponto de ser cientificamente quase inútil" (Meehl)
+-   1978: "deveria ser eliminado; é prejudicial" (Carver)
+
+## Discussão histórica sobre os problemas do p-valor
+
+-   1994: "o teste de hipóteses não nos diz o que queremos saber... por desespero, acreditamos no que diz" (Cohen)
+-   2003: "o teste da hipótese nula pode realmente impedir o progresso científico" (Kirk)
+
+<!-- ## O debate ainda é 'popular' hoje em dia -->
+
+<!-- -   2016: The ASA statement on p-values: context, process, and purposes (Wasserstein and Lazar, The American Statistician) -->
+<!-- -   2018: Statistical Inference as Severe Testing: How to get beyond the Statistics Wars (Mayo) -->
+<!-- -   2019: Moving to a world beyond "p \< 0.05" (Wasserstein et al., The American Statistician) -->
+
+<!-- ## O debate ainda é 'popular' hoje em dia -->
+
+<!-- -   2019: valid p-values behave exactly as they should: some misleading criticisms of p-values and their resolution with s-values (Greenland, The American Statistician) -->
+<!-- -   2019: Scientists rise up against statistical significance (Amrhein et al., Nature) -->
+
+
+## Desafios para análise de dados massivos
+
+-   Aumento no tamanho da amostra traz uma base estatística mais sólida.    
+-   Mas podem levar a uma sensibilidade estatística maior.
+
+## P-valor
+
+Suponha $Y$ e $X$, resultados de grupos tratados e não tratados, com $n_x = n_y = n$ e $\sigma_x = \sigma_y = \sigma$ (conhecidos).
+ \
+$H_0: \ \ \mu_y = \mu_x$
+
+$$z=\frac{\overline y - \overline x-(\mu_y - \mu_x)}{\sqrt{\frac{\sigma^2_y}{n_y}+\frac{\sigma^2_x}{n_x}}} = \frac{\overline y - \overline x}{\sigma\sqrt{2}}\sqrt{n},$$
+
+
+$$p=\Phi \left ( \frac{\overline y - \overline x }{\sigma\sqrt{2}} \sqrt{n}\right)$$
+
+## D-valor
+
+Avalia indivíduos/observações de um grupo em relação a outro, tomados ao acaso:
+
+$$ \delta = P(Y>X)$$
+
+## D-valor
+
+-   Assumindo que $Y$ e $X$ são independentes e pertencem a uma população normal, com médias $\mu_y$ e $\mu_x$ e mesma variância, $\sigma^2$
+
+$$\delta = \Phi \left ( \frac{\mu_y - \mu_x}{\sigma\sqrt{2}} \right ), \ \ \ \ \ \ \ \ \ \ \ \hat \delta = d = \Phi \left ( \frac{\overline y - \overline x}{s\sqrt{2}} \right )$$
+
+## Estudo de Simulação
+
+| Grupo | $n$ | Parâmetros               | Médias $(\mu^*)$                   | Desvio Padrão $(\sigma^*)$         |
+|-------------|-------------|-------------|----------------|----------------|
+| I     | 50  | $\mu=1$ e $\sigma = 1$   | 1,01; 1,03; 1,10; 1,31 e 2,00      | 1,01; 1,03; 1,10; 1,31 e 2,00      |
+| II    | 50  | $\mu=10$ e $\sigma = 10$ | 10,01; 10,03; 10,10; 10,31 e 11,00 | 10,01; 10,03; 10,10; 10,31 e 11,00 |
+
+## Estudo de Simulação
+
+| Grupo | $n$    | Parâmetros               | Médias $(\mu^*)$                   | Desvio Padrão $(\sigma^*)$         |
+|-------------|-------------|-------------|----------------|----------------|
+| III   | 10.000 | $\mu=1$ e $\sigma = 1$   | 1,01; 1,03; 1,10; 1,31 e 2,00      | 1,01; 1,03; 1,10; 1,31 e 2,00      |
+| VI    | 10.000 | $\mu=10$ e $\sigma = 10$ | 10,01; 10,03; 10,10; 10,31 e 11,00 | 10,01; 10,03; 10,10; 10,31 e 11,00 |
+
+## Distribuição Normal
+
+![](Figuras/dist.norm.png)
+Distribuição de d-valores obtidos na simulação envolvendo distribuições normais.
+
+## Distribuição Normal
+
+![](Figuras/n50.png) 
+Comportamento do d-valor na comparação de populações normais com média e desvio padrão diferentes, para n = 50.
+
+## Distribuição Normal
+
+![](Figuras/n10000.png) 
+Comportamento do d-valor na comparação de populações normais com média e desvio padrão diferentes, para n = 10.000.
+
+## Distribuição Gama
+
+![](Figuras/dist.gama.png) 
+Distribuição de d-valores obtidos na simulação envolvendo distribuições gama
+
+## Distribuição Gama
+
+![](Figuras/g50.png) 
+Comportamento do d-valor na comparação de populações gama com média e desvio padrão diferentes, para n = 50.
+
+## Distribuição Gama
+
+![](Figuras/g10000.png) 
+Comportamento do d-valor na comparação de populações gama com média e desvio padrão diferentes, para n = 10.000.
+
+## Aplicação na Educação Superior Brasileira (2019)
+
+-   2.608 IES, 40.709 cursos, 12.350.832 estudantes  (ao fim 6.014.250)
+
+-   43.90% homens, 42,08% brancos
+
+-   41,51% em cursos noturnos, 64,19% em bacharelado, 69,20% em cursos presenciais
+
+-   31,29% recebem algum tipo de financiamento estudantil
+
+## Índice de integralização
+
+ \
+  $$C_I = \frac {\alpha}{S_c/t_c},$$
+
+$S_c$ é a CH total do curso (h),
+
+$t_c$ é o tempo total do curso (anos) e
+
+$\alpha$ é o cumprimento anual de horas de estudo (h/ano)
+
+## Índice de integralização
+
+ \
+  $$\alpha = \frac {h_T}{\Delta t},$$\
+sendo,
+
+$h_T$ o total de horas de estudo cumpridas (h)
+
+$\Delta t$ o tempo desde a matrícula no curso (anos)
+
+## Desempenho por gênero
+
+![](Figuras/fig14.png) 
+Variação do p-valor de subamostras do censo da educação para a diferença de desempenho entre sexos.
+
+## Desempenho por gênero
+
+![](Figuras/fig16b.png) 
+Variação do d-valor de subamostras do censo da educação para a diferença de desempenho entre sexos.
+
+## Desempenho por gênero
+
+![](Figuras/hist01.png) 
+Variação do d-valor de 1000 subamostras do censo da educação para a diferença de desempenho entre sexos.
+
+## Desempenho por gênero
+
+![](Figuras/qqplot2.png) 
+QQplot dos d-valores de 1000 subamostras do censo para a diferença de desempenho entre sexos.
+
+## Perspectivas Futuras
+
+-   Simulação: incluir o efeito da assimetria e da variância.
+-   Avaliar o desempenho em outras categorias.
+-   Estudar o effect size e comparar com o estudo realizado por (BROWNE, 2010).
+-   Avaliar a distribuição geográfica do desempenho dos alunos do Censo da Educação.
+-   Interpretar o d-valor.
+
+## Perspectivas Futuras
+
+![](Figuras/crono.png) 
+Cronograma de atividades.
